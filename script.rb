@@ -69,3 +69,10 @@ while user_input = gets.chomp # loop while getting user input
     print prompt # print the prompt, so the user knows to re-enter input
   end
 end
+
+# !!!! TO DO -> add other squares to the user input
+# !!!! TO DO -> create victory and draw conditions
+# !!!! TO DO -> do not allow a user to input other value on an already asigned square
+# !!!! TO DO -> ask users if they want to play another game
+# !!!! TO DO -> turn counter
+# !!!! TO DO -> bold winning combination
