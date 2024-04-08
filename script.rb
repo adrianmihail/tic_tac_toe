@@ -1,78 +1,195 @@
-# initializing the game
-row1 = ['/', '/', '/']
-row2 = ['/', '/', '/']
-row3 = ['/', '/', '/']
+# create board
+$row1 = [1, 2, 3]
+$row2 = [4, 5, 6]
+$row3 = [7, 8, 9]
 
+# print board
+def print_board
+  p $row1
+  p $row2
+  p $row3
+end
+
+puts 'Initial Board'
+print_board
+
+# asign all square to the same rules
 class Square
-  def initialize(default_value)
-    @default_value = default_value
+  # initialize an instance of a square / will have 9 for each number on the row
+  def initialize(square)
+    @square = square
   end
 
+  # asign square the value X
   def X
-    @default_value = 'X'
+    @square = 'X'
   end
 
-  attr_accessor :default_value
+  # asign square the value O
+  def O
+    @square = 'O'
+  end
 end
 
-# create the squares for each row with default value
-s1 = Square.new('1')
-row1[0] = s1.default_value
+# create the instances of squares
+sq1 = Square.new(sq1)
+sq2 = Square.new(sq2)
+sq3 = Square.new(sq3)
+sq4 = Square.new(sq4)
+sq5 = Square.new(sq5)
+sq6 = Square.new(sq6)
+sq7 = Square.new(sq7)
+sq8 = Square.new(sq8)
+sq9 = Square.new(sq9)
 
-s2 = Square.new('2')
-row1[1] = s2.default_value
+# turn counter
+turn = 0
 
-s3 = Square.new('3')
-row1[2] = s3.default_value
+# default victory condition of X to 0 (false)
+$won_x = 0
 
-s4 = Square.new('4')
-row2[0] = s4.default_value
+# behaivor of variable if X wins
+def x_wins
+  $won_x = 1
+  puts 'X wins!'
+end
 
-s5 = Square.new('5')
-row2[1] = s5.default_value
+# default victory condition of O to 0 (false)
+$won_o = 0
 
-s6 = Square.new('6')
-row2[2] = s6.default_value
+# behaivor of variable if O wins
+def o_wins
+  $won_o = 1
+  puts 'O wins!'
+end
 
-s7 = Square.new('7')
-row3[0] = s7.default_value
+# continusly ask for user input until winning conditions is met
+until $won_x == 1 || $won_o == 1
+  # asign user input
+  puts 'Asign 1x or 1o'
+  user_input = gets.chomp
 
-s8 = Square.new('8')
-row3[1] = s8.default_value
-
-s9 = Square.new('9')
-row3[2] = s9.default_value
-
-prompt = '> '
-puts 'Asign a square from 1 to 9 X or O(o not zero)'
-puts 'For example: s1.X or s1.O'
-print prompt
-
-while user_input = gets.chomp # loop while getting user input
+  # modify board based on user input
   case user_input
-  when 's1.X'
-    puts 'Square 1 is X'
-    row1[0] = s1.X
-    p row1
-    p row2
-    p row3
-    print prompt
-  when 's2.X'
-    puts 'Square 2 is X'
-    row1[1] = s2.X
-    p row1
-    p row2
-    p row3
-    print prompt
+  when '1x'
+    $row1[0] = sq1.X
+    puts '1 is now X!'
+  when '1o'
+    $row1[0] = sq1.O
+    puts '1 is now O!'
+
+  when '2x'
+    $row1[1] = sq2.X
+    puts '2 is now X!'
+  when '2o'
+    $row1[1] = sq2.O
+    puts '2 is now O!'
+
+  when '3x'
+    $row1[2] = sq3.X
+    puts '3 is now X!'
+  when '3o'
+    $row1[2] = sq3.O
+    puts '3 is now O!'
+
+  when '4x'
+    $row2[0] = sq4.X
+    puts '4 is now X!'
+  when '4o'
+    $row2[0] = sq4.O
+    puts '4 is now O!'
+
+  when '5x'
+    $row2[1] = sq5.X
+    puts '5 is now X!'
+  when '5o'
+    $row2[1] = sq5.O
+    puts '5 is now O!'
+
+  when '6x'
+    $row2[2] = sq6.X
+    puts '6 is now X!'
+  when '6o'
+    $row2[2] = sq6.O
+    puts '6 is now O!'
+
+  when '7x'
+    $row3[0] = sq7.X
+    puts '7 is now X!'
+  when '7o'
+    $row3[0] = sq7.O
+    puts '7 is now O!'
+
+  when '8x'
+    $row3[1] = sq8.X
+    puts '8 is now X!'
+  when '8o'
+    $row3[1] = sq8.O
+    puts '8 is now O!'
+
+  when '9x'
+    $row3[2] = sq9.X
+    puts '9 is now X!'
+  when '9o'
+    $row3[2] = sq9.O
+    puts '9 is now O!'
+
   else
-    puts 'Please use the correct input'
-    print prompt # print the prompt, so the user knows to re-enter input
+    puts 'Invalid Input! Please use 1x // 1o'
+    turn -= 1
+  end
+
+  # count turns
+  turn += 1
+  puts "Turn #{turn}!"
+
+  # show status of the board
+  print_board
+
+  # winning conditions for X
+  if $row1[0] == 'X' && $row1[1] == 'X' && $row1[2] == 'X'
+    x_wins
+  elsif $row2[0] == 'X' && $row2[1] == 'X' && $row2[2] == 'X'
+    x_wins
+  elsif $row3[0] == 'X' && $row3[1] == 'X' && $row3[2] == 'X'
+    x_wins
+  elsif $row1[0] == 'X' && $row2[0] == 'X' && $row3[0] == 'X'
+    x_wins
+  elsif $row1[1] == 'X' && $row2[1] == 'X' && $row3[1] == 'X'
+    x_wins
+  elsif $row1[2] == 'X' && $row2[2] == 'X' && $row3[2] == 'X'
+    x_wins
+  elsif $row1[0] == 'X' && $row2[1] == 'X' && $row3[2] == 'X'
+    x_wins
+  elsif $row1[2] == 'X' && $row2[1] == 'X' && $row3[0] == 'X'
+    x_wins
+  else
+    $won_x = 0
+  end
+
+  # winning conditions for O
+  if $row1[0] == 'O' && $row1[1] == 'O' && $row1[2] == 'O'
+    o_wins
+  elsif $row2[0] == 'O' && $row2[1] == 'O' && $row2[2] == 'O'
+    o_wins
+  elsif $row3[0] == 'O' && $row3[1] == 'O' && $row3[2] == 'O'
+    o_wins
+  elsif $row1[0] == 'O' && $row2[0] == 'O' && $row3[0] == 'O'
+    o_wins
+  elsif $row1[1] == 'O' && $row2[1] == 'O' && $row3[1] == 'O'
+    o_wins
+  elsif $row1[2] == 'O' && $row2[2] == 'O' && $row3[2] == 'O'
+    o_wins
+  elsif $row1[0] == 'O' && $row2[1] == 'O' && $row3[2] == 'O'
+    o_wins
+  elsif $row1[2] == 'O' && $row2[1] == 'O' && $row3[0] == 'O'
+    o_wins
+  else
+    $won_o = 0
+  end
+
+  if turn == 9
+    puts 'Draw!'
+    break
   end
 end
-
-# !!!! TO DO -> add other squares to the user input
-# !!!! TO DO -> create victory and draw conditions
-# !!!! TO DO -> do not allow a user to input other value on an already asigned square
-# !!!! TO DO -> ask users if they want to play another game
-# !!!! TO DO -> turn counter
-# !!!! TO DO -> bold winning combination
